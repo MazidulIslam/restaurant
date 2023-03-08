@@ -1,10 +1,9 @@
-import React, { useState } from 'react';
 import styles from '../styles/Featured.module.css';
 import Image from 'next/image';
+import { useState } from 'react';
 
 const Featured = () => {
-  const [slideNumber, setSlideNumber] = useState(0);
-
+  const [index, setIndex] = useState(0);
   const images = [
     '/img/featured.png',
     '/img/featured2.png',
@@ -13,13 +12,13 @@ const Featured = () => {
 
   const handleArrow = (direction) => {
     if (direction === 'l') {
-      setSlideNumber(slideNumber !== 0 ? slideNumber - 1 : 2);
+      setIndex(index !== 0 ? index - 1 : 2);
     }
     if (direction === 'r') {
-      setSlideNumber(slideNumber !== 2 ? slideNumber + 1 : 0);
+      setIndex(index !== 2 ? index + 1 : 0);
     }
   };
-  console.log(slideNumber);
+
   return (
     <div className={styles.container}>
       <div
@@ -36,7 +35,7 @@ const Featured = () => {
       </div>
       <div
         className={styles.wrapper}
-        style={{ transform: `translateX(${-100 * slideNumber}vw)` }}
+        style={{ transform: `translateX(${-100 * index}vw)` }}
       >
         {images.map((img, i) => (
           <div className={styles.imgContainer} key={i}>
@@ -51,8 +50,8 @@ const Featured = () => {
       >
         <Image
           src="/img/arrowr.png"
-          alt=""
           fill
+          alt=""
           style={{ objectFit: 'contain' }}
         />
       </div>
