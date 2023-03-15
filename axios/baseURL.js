@@ -1,2 +1,2 @@
-const baseURL = `${process.env.URL}/api/`;
+const baseURL = `${process.env.NEXTAUTH_URL}/api/`;
 export default baseURL;
