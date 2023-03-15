@@ -1,3 +1,4 @@
+import baseURL from '@/axios/baseURL';
 import instance from '@/axios/instance';
 import axios from 'axios';
 import Image from 'next/image';
@@ -12,9 +13,7 @@ const Index = ({ orders, products }) => {
   const handleDelete = async (id) => {
     console.log(id);
     try {
-      const res = await axios.delete(
-        'http://localhost:3000/api/products/' + id
-      );
+      const res = await axios.delete(`${baseURL}products/` + id);
       setPizzaList(pizzaList.filter((pizza) => pizza._id !== id));
     } catch (err) {
       console.log(err);
@@ -26,7 +25,7 @@ const Index = ({ orders, products }) => {
     const currentStatus = item.status;
 
     try {
-      const res = await axios.put('http://localhost:3000/api/orders/' + id, {
+      const res = await axios.put(`${baseURL}orders/` + id, {
         status: currentStatus + 1,
       });
       setOrderList([
@@ -130,8 +129,8 @@ export const getServerSideProps = async (ctx) => {
     };
   }
 
-  const productRes = await axios.get('http://localhost:3000/api/products');
-  const orderRes = await axios.get('http://localhost:3000/api/orders');
+  const productRes = await axios.get(`${baseURL}products`);
+  const orderRes = await axios.get(`${baseURL}orders`);
 
   return {
     props: {

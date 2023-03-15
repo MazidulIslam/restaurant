@@ -25,7 +25,7 @@ const Cart = () => {
 
   const createOrder = async (data) => {
     try {
-      const res = await axios.post('http://localhost:3000/api/orders', data);
+      const res = await axios.post(`${baseURL}orders`, data);
       if (res.status === 201) {
         dispatch(reset());
         router.push(`/orders/${res.data._id}`);
@@ -170,8 +170,7 @@ const Cart = () => {
               </button>
               <PayPalScriptProvider
                 options={{
-                  'client-id':
-                    'AYctMz_CvNygNTeSHOUB2FJNQ50KSSz2VdtUiqrcmRRQooAbW6f5RaeS_8hXI5KMNZnCCPcuSlJ1UVPp',
+                  'client-id': process.env.PAYPAL_CLIENT_ID,
                   components: 'buttons',
                   currency: 'USD',
                   'disable-funding': 'credit,card,p24',

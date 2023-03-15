@@ -1,3 +1,4 @@
+import baseURL from '@/axios/baseURL';
 import instance from '@/axios/instance';
 import axios from 'axios';
 import Head from 'next/head';
@@ -35,7 +36,7 @@ export const getServerSideProps = async (ctx) => {
     admin = true;
   }
   debugger;
-  const res = await axios.get('http://localhost:3000/api/products');
+  const res = await axios.get(`${baseURL}products`);
   return {
     props: {
       pizzaList: res.data,
